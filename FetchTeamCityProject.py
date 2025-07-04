@@ -154,13 +154,15 @@ def collect_data():
             bt_data = {
                 "name": bt['name'],
                 "id": bt['id'],
+                "template": get_build_template(bt['id']),  # <-- Add this line
                 "steps": [],
                 "vcs_roots": get_vcs_roots(bt['id']),
                 "triggers": get_triggers(bt['id']),
                 "parameters": get_parameters(bt['id']),
                 "agent_requirements": get_agent_requirements(bt['id']),
-                # "compatible_agents": get_compatible_agents(bt['id'])  # Commented out
+                "artifact_rules": get_artifact_rules(bt['id']) 
             }
+
             steps = get_build_steps(bt['id'])
             for step in steps:
                 step_name = step.get("name")
@@ -202,6 +204,7 @@ def collect_project_and_subprojects(project):
             "triggers": get_triggers(bt['id']),
             "parameters": get_parameters(bt['id']),
             "agent_requirements": get_agent_requirements(bt['id']),
+            "artifact_rules": get_artifact_rules(bt['id'])
         }
         steps = get_build_steps(bt['id'])
         for step in steps:
@@ -306,6 +309,9 @@ def write_project_md(f, project, level=1):
         f.write("\n")
     for bt in project["build_types"]:
         f.write(f"{'#'*(level+1)} Build Configuration: {bt['name']} (`{bt['id']}`)\n\n")
+        if bt.get("template"):
+            tpl = bt["template"]
+            f.write(f"**Template:** {tpl.get('name','')} (`{tpl.get('id','')}`)\n\n")
         # VCS Roots
         if bt.get("vcs_roots"):
             f.write("### VCS Roots\n\n")
@@ -362,6 +368,10 @@ def write_project_md(f, project, level=1):
                 step_info = f" (Step: {req['buildStep']})" if req["buildStep"] else ""
                 f.write(f"- **{req['type'].capitalize()}**: `{req['parameter']}` {req['condition']} `{req['value']}`{step_info}\n")
             f.write("\n")
+        # Artifact Rules
+        if bt.get("artifact_rules"):
+            f.write("### Artifact Rules\n\n")
+            f.write(f"```\n{bt['artifact_rules']}\n```\n\n")
     # Recurse into subprojects
     for sub in project.get("subprojects", []):
         write_project_md(f, sub, level=level+1)
@@ -372,7 +382,9 @@ def save_markdown(data, filename="teamcity_summary.md"):
             write_project_md(f, project)
 
 def main():
-    project_name = input("Enter the TeamCity project name: ").strip()
+    # Default project name to "Juice Shop"
+    project_name = "Juice Shop"
+    print(f"Exporting TeamCity project: {project_name}")
     data = collect_data_for_project_and_subprojects(project_name)
     if not data:
         print("No data to export.")
@@ -388,7 +400,7 @@ def collect_project_and_subprojects_flat(project_id, all_projects):
         "id": project['id'],
         "parameter_descriptions": get_parameter_descriptions(project['id']),
         "build_types": [],
-        "subprojects": []
+        "subprojects": []        
     }
     # Collect build types for this project
     build_types = get_build_types(project['id'])
@@ -396,11 +408,13 @@ def collect_project_and_subprojects_flat(project_id, all_projects):
         bt_data = {
             "name": bt['name'],
             "id": bt['id'],
+            "template": get_build_template(bt['id']),  
             "steps": [],
             "vcs_roots": get_vcs_roots(bt['id']),
             "triggers": get_triggers(bt['id']),
             "parameters": get_parameters(bt['id']),
             "agent_requirements": get_agent_requirements(bt['id']),
+            "artifact_rules": get_artifact_rules(bt['id'])
         }
         steps = get_build_steps(bt['id'])
         for step in steps:
@@ -421,6 +435,27 @@ def collect_project_and_subprojects_flat(project_id, all_projects):
         subproject_data = collect_project_and_subprojects_flat(sub["id"], all_projects)
         project_data["subprojects"].append(subproject_data)
     return project_data
+
+def get_artifact_rules(build_type_id):
+    url = f"{TEAMCITY_URL}/app/rest/buildTypes/id:{build_type_id}"
+    resp = requests.get(url, auth=HTTPBasicAuth(USERNAME, PASSWORD), headers={"Accept": "application/json"})
+    if resp.status_code != 200:
+        return ""
+    return resp.json().get("artifactRules", "")
+
+def get_build_template(build_type_id):
+    url = f"{TEAMCITY_URL}/app/rest/buildTypes/id:{build_type_id}"
+    resp = requests.get(url, auth=HTTPBasicAuth(USERNAME, PASSWORD), headers={"Accept": "application/json"})
+    if resp.status_code != 200:
+        return None
+    data = resp.json()
+    template = data.get("template")
+    if template:
+        return {
+            "id": template.get("id"),
+            "name": template.get("name")
+        }
+    return None
 
 if __name__ == "__main__":
     main()

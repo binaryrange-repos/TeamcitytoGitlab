@@ -7,6 +7,7 @@
       {
         "name": "Build",
         "id": "JuiceShop_Build",
+        "template": null,
         "steps": [
           {
             "name": "DockerCommand Step",
@@ -69,7 +70,8 @@
             "env.para3": "test"
           }
         },
-        "agent_requirements": []
+        "agent_requirements": [],
+        "artifact_rules": ""
       }
     ],
     "subprojects": [
@@ -81,6 +83,7 @@
           {
             "name": "Sub-Build",
             "id": "JuiceShop_SubJuiceShop_SubBuild",
+            "template": null,
             "steps": [
               {
                 "name": "Step 1",
@@ -117,7 +120,8 @@
               "system": {},
               "environment": {}
             },
-            "agent_requirements": []
+            "agent_requirements": [],
+            "artifact_rules": ""
           }
         ],
         "subprojects": []
@@ -130,6 +134,7 @@
           {
             "name": "Sub-Build",
             "id": "JuiceShop_SubJuiceShop2_SubBuild",
+            "template": null,
             "steps": [
               {
                 "name": "Step 1",
@@ -166,7 +171,8 @@
               "system": {},
               "environment": {}
             },
-            "agent_requirements": []
+            "agent_requirements": [],
+            "artifact_rules": ""
           }
         ],
         "subprojects": []
