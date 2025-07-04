@@ -237,7 +237,8 @@ def write_project_md(f, project, level=1):
         if bt.get("steps"):
             f.write("### Build Steps\n\n")
             for step in bt["steps"]:
-                f.write(f"#### Step: {step['name']} ({step['type']})\n\n")
+                # Collapsible section for each step
+                f.write(f"<details>\n<summary>Step: {step['name']} ({step['type']})</summary>\n\n")
                 exec_info = ""
                 for key in ["script.content", "jetbrains_powershell_script_code", "command.executable", "dockerfile.path"]:
                     if key in step["properties"]:
@@ -246,7 +247,7 @@ def write_project_md(f, project, level=1):
                 if exec_info:
                     f.write(f"**Executes:**\n```\n{exec_info}\n```\n\n")
                 f.write(format_properties(step["properties"]))
-                f.write("\n")
+                f.write("\n</details>\n\n")
         if bt.get("agent_requirements"):
             f.write("### Agent Requirements\n\n")
             for req in bt["agent_requirements"]:
