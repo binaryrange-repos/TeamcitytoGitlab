@@ -1,0 +1,17 @@
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+
+Build:
+  stage: build
+  variables:
+    para1: "test"
+    system.para2: "test"
+    env.para3: "test"
+  script:
+    - Dockerfile
+    - ./vagrant/bootstrap.sh
+    - echo "Powershell commands1"
+    - echo "Powershell commands2"
+
