@@ -8,7 +8,8 @@
   - **Fetch URL:** `https://github.com/juice-shop/juice-shop.git`  
   - **Default Branch:** `refs/heads/master`
 
-### Parameters
+<details>
+<summary>Parameters</summary>
 
 **Configuration Parameters:**
 
@@ -22,12 +23,17 @@
 
 - env.para3: test
 
-### Triggers
+</details>
+
+<details>
+<summary>Triggers</summary>
 
 - **Type:** vcsTrigger
   - branchFilter: +:*
   - enableQueueOptimization: true
   - quietPeriodMode: DO_NOT_USE
+
+</details>
 
 ### Build Steps
 
@@ -95,14 +101,15 @@ echo "Powershell commands2" |
   - **Fetch URL:** `https://github.com/juice-shop/juice-shop.git`  
   - **Default Branch:** `refs/heads/master`
 
-### Parameters
-
-### Triggers
+<details>
+<summary>Triggers</summary>
 
 - **Type:** vcsTrigger
   - branchFilter: +:*
   - enableQueueOptimization: true
   - quietPeriodMode: DO_NOT_USE
+
+</details>
 
 ### Build Steps
 
@@ -134,14 +141,15 @@ echo "step 1"
   - **Fetch URL:** `https://github.com/juice-shop/juice-shop.git`  
   - **Default Branch:** `refs/heads/master`
 
-### Parameters
-
-### Triggers
+<details>
+<summary>Triggers</summary>
 
 - **Type:** vcsTrigger
   - branchFilter: +:*
   - enableQueueOptimization: true
   - quietPeriodMode: DO_NOT_USE
+
+</details>
 
 ### Build Steps
 
