@@ -76,4 +76,75 @@ echo "Powershell commands2" |
 | jetbrains_powershell_script_mode | CODE |
 | teamcity.step.mode | default |
 
+## Project: Sub-Juice Shop (`JuiceShop_SubJuiceShop`)
+
+### Build Configuration: Sub-Build (`JuiceShop_SubJuiceShop_SubBuild`)
+
+### VCS Roots
+
+- **Name:** https://github.com/juice-shop/juice-shop.git#refs/heads/master  
+  - **Fetch URL:** `https://github.com/juice-shop/juice-shop.git`  
+  - **Default Branch:** `refs/heads/master`
+
+### Parameters
+
+### Triggers
+
+- **Type:** vcsTrigger
+  - branchFilter: +:*
+  - enableQueueOptimization: true
+  - quietPeriodMode: DO_NOT_USE
+
+### Build Steps
+
+#### Step: Step 1 (jetbrains_powershell)
+
+**Executes:**
+```
+echo "step 1"
+```
+
+| Property | Value |
+|---|---|
+| jetbrains_powershell_execution | PS1 |
+| jetbrains_powershell_noprofile | true |
+| jetbrains_powershell_script_code | echo "step 1" |
+| jetbrains_powershell_script_mode | CODE |
+| teamcity.step.mode | default |
+
+## Project: Sub-Juice Shop2 (`JuiceShop_SubJuiceShop2`)
+
+### Build Configuration: Sub-Build (`JuiceShop_SubJuiceShop2_SubBuild`)
+
+### VCS Roots
+
+- **Name:** https://github.com/juice-shop/juice-shop.git#refs/heads/master  
+  - **Fetch URL:** `https://github.com/juice-shop/juice-shop.git`  
+  - **Default Branch:** `refs/heads/master`
+
+### Parameters
+
+### Triggers
+
+- **Type:** vcsTrigger
+  - branchFilter: +:*
+  - enableQueueOptimization: true
+  - quietPeriodMode: DO_NOT_USE
+
+### Build Steps
+
+#### Step: Step 1 (jetbrains_powershell)
+
+**Executes:**
+```
+echo "step 1"
+```
+
+| Property | Value |
+|---|---|
+| jetbrains_powershell_execution | PS1 |
+| jetbrains_powershell_noprofile | true |
+| jetbrains_powershell_script_code | echo "step 1" |
+| jetbrains_powershell_script_mode | CODE |
+| teamcity.step.mode | default |
 

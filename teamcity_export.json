@@ -2,6 +2,7 @@
   {
     "name": "Juice Shop",
     "id": "JuiceShop",
+    "parameter_descriptions": {},
     "build_types": [
       {
         "name": "Build",
@@ -69,6 +70,106 @@
           }
         },
         "agent_requirements": []
+      }
+    ],
+    "subprojects": [
+      {
+        "name": "Sub-Juice Shop",
+        "id": "JuiceShop_SubJuiceShop",
+        "parameter_descriptions": {},
+        "build_types": [
+          {
+            "name": "Sub-Build",
+            "id": "JuiceShop_SubJuiceShop_SubBuild",
+            "steps": [
+              {
+                "name": "Step 1",
+                "type": "jetbrains_powershell",
+                "properties": {
+                  "jetbrains_powershell_execution": "PS1",
+                  "jetbrains_powershell_noprofile": "true",
+                  "jetbrains_powershell_script_code": "echo \"step 1\"",
+                  "jetbrains_powershell_script_mode": "CODE",
+                  "teamcity.step.mode": "default"
+                }
+              }
+            ],
+            "vcs_roots": [
+              {
+                "id": "JuiceShop_JuiceShop_HttpsGithubComJuiceShopJuiceShopGitRefsHeadsMaster",
+                "name": "https://github.com/juice-shop/juice-shop.git#refs/heads/master",
+                "fetchUrl": "https://github.com/juice-shop/juice-shop.git",
+                "defaultBranch": "refs/heads/master"
+              }
+            ],
+            "triggers": [
+              {
+                "type": "vcsTrigger",
+                "properties": {
+                  "branchFilter": "+:*",
+                  "enableQueueOptimization": "true",
+                  "quietPeriodMode": "DO_NOT_USE"
+                }
+              }
+            ],
+            "parameters": {
+              "configuration": {},
+              "system": {},
+              "environment": {}
+            },
+            "agent_requirements": []
+          }
+        ],
+        "subprojects": []
+      },
+      {
+        "name": "Sub-Juice Shop2",
+        "id": "JuiceShop_SubJuiceShop2",
+        "parameter_descriptions": {},
+        "build_types": [
+          {
+            "name": "Sub-Build",
+            "id": "JuiceShop_SubJuiceShop2_SubBuild",
+            "steps": [
+              {
+                "name": "Step 1",
+                "type": "jetbrains_powershell",
+                "properties": {
+                  "jetbrains_powershell_execution": "PS1",
+                  "jetbrains_powershell_noprofile": "true",
+                  "jetbrains_powershell_script_code": "echo \"step 1\"",
+                  "jetbrains_powershell_script_mode": "CODE",
+                  "teamcity.step.mode": "default"
+                }
+              }
+            ],
+            "vcs_roots": [
+              {
+                "id": "JuiceShop_SubJuiceShop2_HttpsGithubComJuiceShopJuiceShopGitRefsHeadsMaster",
+                "name": "https://github.com/juice-shop/juice-shop.git#refs/heads/master",
+                "fetchUrl": "https://github.com/juice-shop/juice-shop.git",
+                "defaultBranch": "refs/heads/master"
+              }
+            ],
+            "triggers": [
+              {
+                "type": "vcsTrigger",
+                "properties": {
+                  "branchFilter": "+:*",
+                  "enableQueueOptimization": "true",
+                  "quietPeriodMode": "DO_NOT_USE"
+                }
+              }
+            ],
+            "parameters": {
+              "configuration": {},
+              "system": {},
+              "environment": {}
+            },
+            "agent_requirements": []
+          }
+        ],
+        "subprojects": []
       }
     ]
   }
