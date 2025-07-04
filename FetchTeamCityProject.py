@@ -210,8 +210,8 @@ def write_project_md(f, project, level=1):
                 f.write(f"  - **Default Branch:** `{vcs.get('defaultBranch','')}`\n")
             f.write("\n")
         params = bt.get("parameters", {})
-        if params:
-            f.write("### Parameters\n\n")
+        if params and any(params.values()):
+            f.write("<details>\n<summary>Parameters</summary>\n\n")
             if params.get("configuration"):
                 f.write("**Configuration Parameters:**\n\n")
                 for k, v in params["configuration"].items():
@@ -227,13 +227,14 @@ def write_project_md(f, project, level=1):
                 for k, v in params["environment"].items():
                     f.write(f"- {k}: {v}\n")
                 f.write("\n")
+            f.write("</details>\n\n")
         if bt.get("triggers"):
-            f.write("### Triggers\n\n")
+            f.write("<details>\n<summary>Triggers</summary>\n\n")
             for trig in bt["triggers"]:
                 f.write(f"- **Type:** {trig['type']}\n")
                 for k, v in trig["properties"].items():
                     f.write(f"  - {k}: {v}\n")
-            f.write("\n")
+            f.write("\n</details>\n\n")
         if bt.get("steps"):
             f.write("### Build Steps\n\n")
             for step in bt["steps"]:
