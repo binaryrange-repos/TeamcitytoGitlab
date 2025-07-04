@@ -31,7 +31,8 @@
 
 ### Build Steps
 
-#### Step: DockerCommand Step (DockerCommand)
+<details>
+<summary>Step: DockerCommand Step (DockerCommand)</summary>
 
 **Executes:**
 ```
@@ -46,7 +47,10 @@ Dockerfile
 | dockerfile.source | PATH |
 | teamcity.step.mode | default |
 
-#### Step: simpleRunner Step (simpleRunner)
+</details>
+
+<details>
+<summary>Step: simpleRunner Step (simpleRunner)</summary>
 
 **Executes:**
 ```
@@ -59,7 +63,10 @@ Dockerfile
 | teamcity.step.mode | default |
 | use.custom.script | true |
 
-#### Step: echo step (jetbrains_powershell)
+</details>
+
+<details>
+<summary>Step: echo step (jetbrains_powershell)</summary>
 
 **Executes:**
 ```
@@ -75,6 +82,8 @@ echo "Powershell commands2"
 echo "Powershell commands2" |
 | jetbrains_powershell_script_mode | CODE |
 | teamcity.step.mode | default |
+
+</details>
 
 ## Project: Sub-Juice Shop (`JuiceShop_SubJuiceShop`)
 
@@ -97,7 +106,8 @@ echo "Powershell commands2" |
 
 ### Build Steps
 
-#### Step: Step 1 (jetbrains_powershell)
+<details>
+<summary>Step: Step 1 (jetbrains_powershell)</summary>
 
 **Executes:**
 ```
@@ -111,6 +121,8 @@ echo "step 1"
 | jetbrains_powershell_script_code | echo "step 1" |
 | jetbrains_powershell_script_mode | CODE |
 | teamcity.step.mode | default |
+
+</details>
 
 ## Project: Sub-Juice Shop2 (`JuiceShop_SubJuiceShop2`)
 
@@ -133,7 +145,8 @@ echo "step 1"
 
 ### Build Steps
 
-#### Step: Step 1 (jetbrains_powershell)
+<details>
+<summary>Step: Step 1 (jetbrains_powershell)</summary>
 
 **Executes:**
 ```
@@ -147,4 +160,6 @@ echo "step 1"
 | jetbrains_powershell_script_code | echo "step 1" |
 | jetbrains_powershell_script_mode | CODE |
 | teamcity.step.mode | default |
+
+</details>
 
